@@ -13,7 +13,9 @@ Metacello new
 ## If you want to depend on it
 
 ```
-spec baseline: 'ContainersOrderPreservingDictionary' with: [ spec repository: 'github://Ducasse/Containers-OrderPreservingDictionary' ].
+spec 
+   baseline: 'ContainersOrderPreservingDictionary' 
+   with: [ spec repository: 'github://Ducasse/Containers-OrderPreservingDictionary' ].
 ```
 
 ## History
