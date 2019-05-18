@@ -1,5 +1,10 @@
 "
 An order-preserving dictionary for strings that returns empty strings instead of raising errors when absent keys/values are accessed.
+
+| dict |
+dict := CTOrderPreservingStringDictionary new. 
+dict at: #missing
+>>> ''
 "
 Class {
 	#name : #CTOrderPreservingStringDictionary,

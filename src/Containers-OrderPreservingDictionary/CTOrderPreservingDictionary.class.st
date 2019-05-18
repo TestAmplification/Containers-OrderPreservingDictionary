@@ -1,5 +1,14 @@
 "
-An order-preserving dictionary that returns a configurable default value (nil by default) when an absent key or value is requested from it rather than raising an exception.
+By default, when CTOrderPreservingDictionaryionary raises an exception. 
+I'm a special kind of order-preserving dictionary that returns a configurable default value (nil by default) instead of raising an exception. 
+
+| dict |
+dict := CTOrderPreservingDictionary new. 
+dict defaultValue: 666.
+dict at: #missing
+>>> 666
+
+See test in CTOrderPreservingDictionaryTest>>#testDefaultValue 
 "
 Class {
 	#name : #CTOrderPreservingDictionary,
