@@ -1,7 +1,12 @@
 "
-This class is a dictionary that uses key insertion order when enumerating, printing, or returing collections of keys/values/associations, but not when testing for equality.
+This class is a dictionary that uses key insertion order when enumerating, printing, or returning collections of keys/values/associations, but not when testing for equality.
 
 Insertion, updating, and inclusion testing have O(1) complexity while removing has O(n) worst-case.
+
+For example, the printing is using the insertion order 
+
+	CTStandardOrderedDictionary orderedDictionaryABC printString 
+	>>> 'a CTStandardOrderedDictionary(#A->''A'' #B->''B'' #C->''C'')'
 "
 Class {
 	#name : #CTStandardOrderedDictionary,
@@ -50,6 +55,17 @@ CTStandardOrderedDictionary class >> newFromPairs: aSequenceableCollection [
 			at: (aSequenceableCollection at: i)
 			put: (aSequenceableCollection at: i + 1)].
 	^ newDictionary.
+]
+
+{ #category : #examples }
+CTStandardOrderedDictionary class >> orderedDictionaryABC [
+	<sampleInstance>
+	| dict |
+	dict := self new. 
+	dict at: #A put: 'A'.
+	dict at: #B put: 'B'.
+	dict at: #C put: 'C'.
+	^ dict
 ]
 
 { #category : #comparing }

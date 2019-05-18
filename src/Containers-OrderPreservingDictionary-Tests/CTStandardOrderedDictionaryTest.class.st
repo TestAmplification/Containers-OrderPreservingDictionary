@@ -225,9 +225,9 @@ CTStandardOrderedDictionaryTest >> nonIdentityOrderedAssociations [
 
 { #category : #accessing }
 CTStandardOrderedDictionaryTest >> orderedAssociations [
-	self isTestingIdentityDictionary
-		ifTrue: [^ self identityOrderedAssociations]
-		ifFalse: [^ self nonIdentityOrderedAssociations]
+	^ self isTestingIdentityDictionary
+		ifTrue: [ self identityOrderedAssociations ]
+		ifFalse: [ self nonIdentityOrderedAssociations ]
 ]
 
 { #category : #accessing }
