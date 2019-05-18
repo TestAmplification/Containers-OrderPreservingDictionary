@@ -15,8 +15,8 @@ BaselineOfContainersOrderPreservingDictionary >> baseline: spec [
 		for: #common
 		do: [ spec
 				package: 'Containers-OrderPreservingDictionary';
-				package: 'Containers-OrderPreservingDictionary-Tests' with: [ spec requires: #('Collections-OrderPreservingDictionary') ];
+				package: 'Containers-OrderPreservingDictionary-Tests' with: [ spec requires: #('Containers-OrderPreservingDictionary') ];
 				group: 'default' with: #('core' 'tests');
 				group: 'core' with: #('Containers-OrderPreservingDictionary');
-				group: 'tests' with: #('Collections-OrderPreservingDictionary-Tests') ]
+				group: 'tests' with: #('Containers-OrderPreservingDictionary-Tests') ]
 ]
