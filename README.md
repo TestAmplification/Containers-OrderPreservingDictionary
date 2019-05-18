@@ -25,7 +25,7 @@ Metacello new
 ```
 spec 
    baseline: 'ContainersOrderPreservingDictionary' 
-   with: [ spec repository: 'github://Ducasse/Containers-OrderPreservingDictionary' ].
+   with: [ spec repository: 'github://Ducasse/Containers-OrderPreservingDictionary/src' ].
 ```
 
 ## History
