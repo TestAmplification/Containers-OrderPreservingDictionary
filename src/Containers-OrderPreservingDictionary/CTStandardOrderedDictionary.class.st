@@ -18,11 +18,6 @@ Class {
 	#category : #'Containers-OrderPreservingDictionary'
 }
 
-{ #category : #inspecting }
-CTStandardOrderedDictionary class >> inspectorClass [
-	^ Dictionary inspectorClass
-]
-
 { #category : #'instance creation' }
 CTStandardOrderedDictionary class >> new [
 	^ self new: 10
