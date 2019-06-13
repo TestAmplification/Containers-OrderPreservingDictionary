@@ -455,7 +455,7 @@ CTStandardOrderedDictionary >> keysSortedSafely [
 
 { #category : #private }
 CTStandardOrderedDictionary >> orderedKeys [
-	^ orderedKeys
+	^ orderedKeys reject: [ :each | each isNil ]
 ]
 
 { #category : #private }
