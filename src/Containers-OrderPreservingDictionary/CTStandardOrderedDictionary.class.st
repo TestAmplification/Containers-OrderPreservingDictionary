@@ -1,12 +1,19 @@
 "
-This class is a dictionary that uses key insertion order when enumerating, printing, or returning collections of keys/values/associations, but not when testing for equality.
+This class is a dictionary that uses key insertion order when enumerating, printing, or returning collections of keys/values/associations, but not when testing for equality. When the same key is used multiple time, the first insertion is kept.
 
 Insertion, updating, and inclusion testing have O(1) complexity while removing has O(n) worst-case.
 
 For example, the printing is using the insertion order 
 
-	CTStandardOrderedDictionary orderedDictionaryABC printString 
+```
+CTStandardOrderedDictionary orderedDictionaryABC printString 
 	>>> 'a CTStandardOrderedDictionary(#A->''A'' #B->''B'' #C->''C'')'
+```
+
+```
+CTStandardOrderedDictionary orderedDictionaryABA printString 
+	>>> 'a CTStandardOrderedDictionary(#A->''A'' #B->''B'')'
+```
 "
 Class {
 	#name : #CTStandardOrderedDictionary,
@@ -35,8 +42,8 @@ CTStandardOrderedDictionary class >> new: aCapacity [
 
 { #category : #'instance creation' }
 CTStandardOrderedDictionary class >> newFrom: anAssociationCollection [
-	| newDictionary |
 
+	| newDictionary |
 	newDictionary := self new: anAssociationCollection size.
 	anAssociationCollection associationsDo: [:each |
 		newDictionary
@@ -47,14 +54,25 @@ CTStandardOrderedDictionary class >> newFrom: anAssociationCollection [
 
 { #category : #'instance creation' }
 CTStandardOrderedDictionary class >> newFromPairs: aSequenceableCollection [
-	| newDictionary |
 
+	| newDictionary |
 	newDictionary := self new: (aSequenceableCollection size / 2) floor.
 	1 to: aSequenceableCollection size - 1 by: 2 do: [:i |
 		newDictionary
 			at: (aSequenceableCollection at: i)
 			put: (aSequenceableCollection at: i + 1)].
 	^ newDictionary.
+]
+
+{ #category : #examples }
+CTStandardOrderedDictionary class >> orderedDictionaryABA [
+	<sampleInstance>
+	| dict |
+	dict := self new. 
+	dict at: #A put: 'A'.
+	dict at: #B put: 'B'.
+	dict at: #A put: 'A'.
+	^ dict
 ]
 
 { #category : #examples }
@@ -125,8 +143,7 @@ CTStandardOrderedDictionary >> associationAt: aKey ifAbsent: aBlock [
 
 { #category : #accessing }
 CTStandardOrderedDictionary >> associationAt: aKey ifPresent: aBlock [
-	"Squeak and GS do not have #associationAt:ifPresent: so it
-	is reimplemented for portability"
+
 	^ aBlock cull:
 		(dictionary
 			associationAt: aKey
@@ -135,8 +152,8 @@ CTStandardOrderedDictionary >> associationAt: aKey ifPresent: aBlock [
 
 { #category : #accessing }
 CTStandardOrderedDictionary >> associations [
-	| associations i |
 
+	| associations i |
 	associations := Array new: self size.
 	i := 1.
 	self associationsDo: [:each |
@@ -180,8 +197,7 @@ CTStandardOrderedDictionary >> at: aKey ifAbsentPut: aBlock [
 
 { #category : #accessing }
 CTStandardOrderedDictionary >> at: aKey ifPresent: aBlock [
-	"Squeak and GS don't use #cull: for the ifPresent:
-	block, so it is reimplemented for portability"
+
 	^ aBlock cull:
 		(self
 			at: aKey
@@ -190,8 +206,7 @@ CTStandardOrderedDictionary >> at: aKey ifPresent: aBlock [
 
 { #category : #accessing }
 CTStandardOrderedDictionary >> at: aKey ifPresent: aPresentBlock ifAbsent: anAbsentBlock [
-	"Squeak and GS don't use #cull: for the ifPresent:
-	block, so it is reimplemented for portability"
+
 	self
 		at: aKey
 		ifPresent: [:value | ^ aPresentBlock cull: value].
@@ -200,8 +215,8 @@ CTStandardOrderedDictionary >> at: aKey ifPresent: aPresentBlock ifAbsent: anAbs
 
 { #category : #accessing }
 CTStandardOrderedDictionary >> at: aKey put: aValue [
+	
 	| oldSize |
-
 	oldSize := dictionary size.
 	dictionary
 		at: aKey
@@ -388,9 +403,9 @@ CTStandardOrderedDictionary >> keyAtIndex: anIndex [
 
 { #category : #accessing }
 CTStandardOrderedDictionary >> keyAtIndex: anIndex ifAbsent: aBlock [
-	(anIndex > 0 and: [anIndex <= self size])
-		ifTrue: [^ orderedKeys at: anIndex]
-		ifFalse: [^ aBlock value]
+	^ (anIndex > 0 and: [anIndex <= self size])
+		ifTrue: [ orderedKeys at: anIndex]
+		ifFalse: aBlock
 ]
 
 { #category : #accessing }

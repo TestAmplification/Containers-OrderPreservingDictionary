@@ -1188,7 +1188,7 @@ CTStandardOrderedDictionaryTest >> testNewFromPairs [
 ]
 
 { #category : #tests }
-CTStandardOrderedDictionaryTest >> testOccurancesOf [
+CTStandardOrderedDictionaryTest >> testOccurencesOf [
 	| dictionary |
 
 	dictionary := self emptyDictionary.
@@ -1198,6 +1198,30 @@ CTStandardOrderedDictionaryTest >> testOccurancesOf [
 			at: each
 			put: self newValue.
 		self assert: (dictionary occurrencesOf: self newValue) = i]
+]
+
+{ #category : #tests }
+CTStandardOrderedDictionaryTest >> testOrderedKeys [
+ 	
+	| dict|
+ 	dict := self dictionaryClass  new. 
+ 	dict at: 'A' put: 'a'.
+ 	dict at: 'B' put: 'b'.
+ 	dict at: 'C' put: 'c'.
+ 	self assert: dict orderedKeys equals: #('A' 'B' 'C')
+]
+
+{ #category : #tests }
+CTStandardOrderedDictionaryTest >> testPrintElementsOn [ 
+ 	
+	| str dict|
+ 	dict := self dictionaryClass new. 
+ 	dict at: 'A' put: 'a'.
+ 	dict at: 'B' put: 'b'.
+ 	dict at: 'C' put: 'c'.
+ 	str := String new writeStream.
+ 	dict printElementsOn: str. 
+ 	self assert: str contents equals: '(''A''->''a'' ''B''->''b'' ''C''->''c'')' 
 ]
 
 { #category : #tests }
