@@ -1,19 +1,12 @@
 "
-This class is a dictionary that uses key insertion order when enumerating, printing, or returning collections of keys/values/associations, but not when testing for equality. When the same key is used multiple time, the first insertion is kept.
+This class is a dictionary that uses key insertion order when enumerating, printing, or returning collections of keys/values/associations, but not when testing for equality.
 
 Insertion, updating, and inclusion testing have O(1) complexity while removing has O(n) worst-case.
 
 For example, the printing is using the insertion order 
 
-```
-CTStandardOrderedDictionary orderedDictionaryABC printString 
+	CTStandardOrderedDictionary orderedDictionaryABC printString 
 	>>> 'a CTStandardOrderedDictionary(#A->''A'' #B->''B'' #C->''C'')'
-```
-
-```
-CTStandardOrderedDictionary orderedDictionaryABA printString 
-	>>> 'a CTStandardOrderedDictionary(#A->''A'' #B->''B'')'
-```
 "
 Class {
 	#name : #CTStandardOrderedDictionary,
@@ -24,11 +17,6 @@ Class {
 	],
 	#category : #'Containers-OrderPreservingDictionary'
 }
-
-{ #category : #inspecting }
-CTStandardOrderedDictionary class >> inspectorClass [
-	^ Dictionary inspectorClass
-]
 
 { #category : #'instance creation' }
 CTStandardOrderedDictionary class >> new [
@@ -475,7 +463,7 @@ CTStandardOrderedDictionary >> keysSortedSafely [
 
 { #category : #private }
 CTStandardOrderedDictionary >> orderedKeys [
-	^ orderedKeys
+	^ orderedKeys reject: [ :each | each isNil ]
 ]
 
 { #category : #private }
