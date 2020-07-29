@@ -29,33 +29,33 @@ CTStandardOrderedDictionaryTest >> absentValue [
 CTStandardOrderedDictionaryTest >> assertDictionary: aFirstDictionary doesNotEqual: aSecondDictionary [
 	"test symmetric inequality"
 	self
-		deny: aFirstDictionary = aSecondDictionary;
-		deny: aSecondDictionary = aFirstDictionary
+		deny: aFirstDictionary equals: aSecondDictionary;
+		deny: aSecondDictionary equals: aFirstDictionary
 ]
 
 { #category : #assertions }
 CTStandardOrderedDictionaryTest >> assertDictionary: aFirstDictionary equals: aSecondDictionary [
 	"test reflixive and symmetric equality"
 	self
-		assert: aFirstDictionary = aFirstDictionary;
-		assert: aFirstDictionary = aSecondDictionary;
-		assert: aSecondDictionary = aSecondDictionary;
-		assert: aSecondDictionary = aFirstDictionary
+		assert: aFirstDictionary equals: aFirstDictionary;
+		assert: aFirstDictionary equals: aSecondDictionary;
+		assert: aSecondDictionary equals: aSecondDictionary;
+		assert: aSecondDictionary equals: aFirstDictionary
 ]
 
 { #category : #assertions }
 CTStandardOrderedDictionaryTest >> assertIsArray: anArray withElements: aCollection [
 	self
 		assert: anArray isArray;
-		assert: anArray = aCollection asArray
+		assert: anArray equals: aCollection asArray
 ]
 
 { #category : #assertions }
 CTStandardOrderedDictionaryTest >> assertIsDictionary: aFirstDictionary copiedFrom: aSecondDictionary withOrderedAssociations: anAssociationCollection [
 	self
-		deny: aFirstDictionary == aSecondDictionary;
-		deny: aFirstDictionary dictionary == aSecondDictionary dictionary;
-		deny: aFirstDictionary orderedKeys == aSecondDictionary orderedKeys.
+		deny: aFirstDictionary identicalTo: aSecondDictionary;
+		deny: aFirstDictionary dictionary identicalTo: aSecondDictionary dictionary;
+		deny: aFirstDictionary orderedKeys identicalTo: aSecondDictionary orderedKeys.
 
 	"esnure the associations were copied (the keys and values can be shared)"
 	aFirstDictionary associations do: [:each |
@@ -71,9 +71,9 @@ CTStandardOrderedDictionaryTest >> assertIsDictionary: anObject withOrderedAssoc
 	"tests that anObject is an instance of the correct dictionary class
 	with the specified ordered associations"
 	self
-		assert: anObject class == self dictionaryClass;
+		assert: anObject class identicalTo: self dictionaryClass;
 		assert: anObject orderedKeys size >= anAssociationCollection size;
-		assert: anObject associations size = anAssociationCollection size.
+		assert: anObject associations size equals: anAssociationCollection size.
 
 	anAssociationCollection withIndexDo: [:each :i |
 		self isTestingIdentityDictionary
@@ -93,8 +93,8 @@ CTStandardOrderedDictionaryTest >> assertIsDictionary: anObject withUnorderedAss
 	"tests that anObject is an instance of the correct dictionary class
 	with the specified associations, but ignoring the order"
 	self
-		assert: anObject class == self dictionaryClass;
-		assert: anObject size = anAssociationCollection size.
+		assert: anObject class identicalTo: self dictionaryClass;
+		assert: anObject size equals: anAssociationCollection size.
 	anAssociationCollection do: [:each |
 		self assert: (anObject includesAssociation: each)].
 ]
@@ -280,7 +280,7 @@ CTStandardOrderedDictionaryTest >> should: aBlock enumerate: aCollection [
 
 	enumerated := OrderedCollection new.
 	aBlock value: [:each | enumerated add: each].
-	self assert: enumerated = aCollection asOrderedCollection.
+	self assert: enumerated equals: aCollection asOrderedCollection.
 ]
 
 { #category : #assertions }
@@ -293,8 +293,8 @@ CTStandardOrderedDictionaryTest >> should: aBlock enumerate: aFirstCollection an
 		firstEnumerated addLast: first.
 		secondEnumerated addLast: second].
 	self
-		assert: firstEnumerated = aFirstCollection asOrderedCollection;
-		assert: secondEnumerated = aSecondCollection asOrderedCollection.
+		assert: firstEnumerated equals: aFirstCollection asOrderedCollection;
+		assert: secondEnumerated equals: aSecondCollection asOrderedCollection.
 ]
 
 { #category : #tests }
@@ -1212,6 +1212,17 @@ CTStandardOrderedDictionaryTest >> testOrderedKeys [
 ]
 
 { #category : #tests }
+CTStandardOrderedDictionaryTest >> testOrderedKeys2 [
+ 	
+	| dict|
+ 	dict := self dictionaryClass  new. 
+ 	dict at: 'A' put: 'a'.
+ 	dict at: 'B' put: 'b'.
+ 	dict at: 'A' put: 'c'.
+ 	self assert: dict orderedKeys equals: #('A' 'B')
+]
+
+{ #category : #tests }
 CTStandardOrderedDictionaryTest >> testPrintElementsOn [ 
  	
 	| str dict|
@@ -1327,11 +1338,11 @@ CTStandardOrderedDictionaryTest >> testSize [
 	| dictionary |
 
 	dictionary := self emptyDictionary.
-	self assert: dictionary size = 0.
+	self assert: dictionary size equals: 0.
 
 	self orderedAssociations withIndexDo: [:each :i |
 		dictionary add: each.
-		self assert: dictionary size = i].
+		self assert: dictionary size equals: i].
 
 	self orderedAssociations size to: 1 by: -1 do: [:i |
 		dictionary removeKey: (self orderedKeys at: i).
