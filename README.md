@@ -1,8 +1,9 @@
 # Containers-OrderPreservingDictionary
 An implementation of multiple dictionaries preserving the order of addition of elements.
 
-[![Build Status](https://travis-ci.com/Ducasse/Containers-OrderPreservingDictionary.svg?branch=master)](https://travis-ci.com/Ducasse/Containers-OrderPreservingDictionary)
-![https://github.com/Ducasse/Containers-OrderPreservingDictionary/workflows/currentStablePharo/badge.svg](https://github.com/Ducasse/Containers-OrderPreservingDictionary/workflows/currentStablePharo/badge.svg)
+
+![https://github.com/pharo-containers/Containers-OrderPreservingDictionary/workflows/currentStablePharo/badge.svg](https://github.com/pharo-containers/Containers-OrderPreservingDictionary/workflows/currentStablePharo/badge.svg)
+![https://github.com/pharo-containers/Containers-OrderPreservingDictionary/workflows/matrix/badge.svg](https://github.com/pharo-containers/Containers-OrderPreservingDictionary/workflows/matrix/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github//Ducasse/Containers-OrderPreservingDictionary/badge.svg?branch=master)](https://coveralls.io/github//Ducasse/Containers-OrderPreservingDictionary?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)]()
 
