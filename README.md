@@ -15,7 +15,7 @@ An implementation of multiple dictionaries preserving the order of addition of e
 ```
 Metacello new
    baseline: 'ContainersOrderPreservingDictionary';
-   repository: 'github://Ducasse/Containers-OrderPreservingDictionary';
+   repository: 'github://pharo-containers/Containers-OrderPreservingDictionary';
    load.
 ```
 
@@ -24,7 +24,7 @@ Metacello new
 ```
 spec 
    baseline: 'ContainersOrderPreservingDictionary' 
-   with: [ spec repository: 'github://Ducasse/Containers-OrderPreservingDictionary/src' ].
+   with: [ spec repository: 'github://pharo-containers/Containers-OrderPreservingDictionary/src' ].
 ```
 
 ## History
